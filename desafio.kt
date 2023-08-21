@@ -4,18 +4,27 @@ enum class Nivel { BASICO, INTERMEDIARIO, DIFICIL }
 
 class Usuario
 
-data class ConteudoEducacional(var nome: String, val duracao: Int = 60)
+data class ConteudoEducacional(var nome: String, val duracao: Int = 220)
 
 data class Formacao(val nome: String, var conteudos: List<ConteudoEducacional>) {
 
     val inscritos = mutableListOf<Usuario>()
     
     fun matricular(usuario: Usuario) {
-        TODO("Utilize o parâmetro $usuario para simular uma matrícula (usar a lista de $inscritos).")
+        inscritos.add(usuario)
+        println("O usuário ${inscritos.indexOf(usuario) + 1} está matriculado na formação $nome e ${conteudos[0].nome} no curso ${conteudos[1].nome} com carga horária de ${conteudos[1].duracao} horas.")
     }
 }
 
 fun main() {
-    TODO("Analise as classes modeladas para este domínio de aplicação e pense em formas de evoluí-las.")
-    TODO("Simule alguns cenários de teste. Para isso, crie alguns objetos usando as classes em questão.")
+    val inscritos = mutableListOf<Usuario>()
+    
+    val conteudo1 = ConteudoEducacional("Kotlin")
+    val conteudo2 = ConteudoEducacional("Java", 220)
+    val conteudos = listOf(conteudo1, conteudo2)
+    
+    val formacao = Formacao("Backend", conteudos)
+    
+    val usuario = Usuario()
+    formacao.matricular(usuario)
 }
